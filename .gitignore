@@ -14,3 +14,7 @@ ivyroundup/src/modules/*
 out.txt
 repomod
 srcmod
+ivyroundup/**
+ivyroundup*/**
+ivyroundup/
+ivyroundup

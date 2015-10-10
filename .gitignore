@@ -1,0 +1,16 @@
+ivyroundup/*
+!ivyroundup/repo
+ivyroundup/repo/*
+!ivyroundup/repo/modules
+ivyroundup/repo/modules/*
+!ivyroundup/repo/modules/com.jquery/
+!ivyroundup/repo/modules/com.leafletjs/
+!ivyroundup/src
+ivyroundup/src/*
+!ivyroundup/src/modules
+ivyroundup/src/modules/*
+!ivyroundup/src/modules/com.jquery/
+!ivyroundup/src/modules/com.leafletjs/
+out.txt
+repomod
+srcmod

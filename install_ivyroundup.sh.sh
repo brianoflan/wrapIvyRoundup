@@ -4,6 +4,7 @@ set -e ;
 
 DEBUG=1 ;
 
+gitBranch=nonInteractiveMinimal ;
 # ivyrepoGitUrl=https://github.com/archiecobbs/ivyroundup.git ;
 ivyrepoGitUrl=https://github.com/brianoflan/ivyroundup-non-interactive.git
 
@@ -75,6 +76,7 @@ if [[ ! -L srcmod ]] ; then
 fi ;
 
 cd ivyroundup ;
+git checkout $gitBranch ;
 export ANT_OPTS="$ANT_OPTS -Xmx500m" ;
 ( ant get-xalan all "$@" || true ) ;
 git add repo/modules.xml 

@@ -76,6 +76,7 @@ if [[ ! -L srcmod ]] ; then
 fi ;
 
 cd ivyroundup ;
+git fetch origin ;
 git checkout $gitBranch ;
 export ANT_OPTS="$ANT_OPTS -Xmx500m" ;
 ( ant get-xalan all "$@" || true ) ;

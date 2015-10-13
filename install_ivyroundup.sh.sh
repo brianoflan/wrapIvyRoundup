@@ -4,17 +4,39 @@ set -e ;
 
 DEBUG=1 ;
 
+IVY_URL_FILE="apache-ivy-2.1.0-bin.tar.gz" ;
+IVY_URL="http://archive.apache.org/dist/ant/ivy/2.1.0" ;
 gitBranch=nonInteractiveMinimal ;
 # ivyrepoGitUrl=https://github.com/archiecobbs/ivyroundup.git ;
 ivyrepoGitUrl=https://github.com/brianoflan/ivyroundup-non-interactive.git
 
-if [[ -f $IVY_JAR ]] ; then
+if [[ ! -f $IVY_JAR ]] ; then
   # export IVY_JAR=~/workspace/w/gen_use/lang/ivy/resource/ivy/ivy.jar ;
   export IVY_JAR=/usr/share/java/ivy.jar ;
 fi ;
-if [[ -f $IVY_JAR ]] ; then
+if [[ ! -f $IVY_JAR ]] ; then
   # export IVY_JAR=~/workspace/w/gen_use/lang/ivy/resource/ivy/ivy.jar ;
   export IVY_JAR=~/workspace/w/gen_use/lang/ivy/ivy_repo4/org.apache.ivy/ivy/2.1.0/jars/ivy-2.1.0.jar ;
+  if [[ ! -f $IVY_JAR ]] ; then
+    ivyDir=`dirname $IVY_JAR` ;
+    echo "ivyDir $ivyDir" ;
+    mkdir -p $ivyDir ;
+    rm -rf tmpIvyDir 2>/dev/null || true ;
+    pwd0=`pwd` ;
+    mkdir tmpIvyDir && cd tmpIvyDir ;
+    curl $IVY_URL/$IVY_URL_FILE > ./$IVY_URL_FILE ;
+    tar -xzf $IVY_URL_FILE ;
+    untarDir=`ls | egrep -v '[.]tar[.]gz$'` ;
+    jarFile=`ls $untarDir/ivy*.jar` ;
+    echo "jarFile='$jarFile'" ;
+    if [[ -e "$jarFile" ]] ; then
+      mv "$jarFile" "$IVY_JAR" ;
+    else
+      echo "ERROR: Failed to download Ivy." ;
+      exit 1 ;
+    fi ;
+    cd "$pwd0" ;
+  fi ;
 fi ;
 
 d0="$1" ;
